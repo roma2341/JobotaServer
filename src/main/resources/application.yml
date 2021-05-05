@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      database: jobota
+      auto-index-creation: true
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+  main:
+    web-application-type: reactive
+logLevel: DEBUG
+mongock:
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+  change-logs-scan-package: com.zigzag.jobotaserver.migrations

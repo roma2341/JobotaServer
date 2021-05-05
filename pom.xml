@@ -19,7 +19,23 @@
 		<kotlin.version>1.4.32</kotlin.version>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
+		<liquibase-mongodb.version>4.3.2</liquibase-mongodb.version>
+		<liquibase.version>4.2.1</liquibase.version>
+		<mongodb.driver-sync.version>4.2.3</mongodb.driver-sync.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.github.cloudyrock.mongock</groupId>
+				<artifactId>mongock-bom</artifactId>
+				<version>4.3.8</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
@@ -29,6 +45,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,8 +93,16 @@
 		 <dependency>
                     <groupId>org.mapstruct</groupId>
                     <artifactId>mapstruct</artifactId>
-                    <version>${mapstruct.version}</version>
+                    <version>1.4.2.Final</version>
         </dependency>
+		<dependency>
+			<groupId>com.github.cloudyrock.mongock</groupId>
+			<artifactId>mongock-spring-v5</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.cloudyrock.mongock</groupId>
+			<artifactId>mongodb-springdata-v3-driver</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -169,7 +197,8 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+                <version>${project.parent.version}</version>
+            </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
