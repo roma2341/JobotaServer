@@ -1,7 +1,7 @@
-package com.zigzag.jobotaserver.job.service
+package com.zigzag.jobotaserver.features.job.service
 
-import com.zigzag.jobotaserver.job.database.Job
-import com.zigzag.jobotaserver.job.database.JobRepository
+import com.zigzag.jobotaserver.features.job.database.Job
+import com.zigzag.jobotaserver.features.job.database.JobRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

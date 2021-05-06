@@ -1,12 +1,12 @@
-package com.zigzag.jobotaserver.user.controller
+package com.zigzag.jobotaserver.features.user.controller
 
 import com.zigzag.jobotaserver.core.ICrudRestController
-import com.zigzag.jobotaserver.user.database.PlatformUserRepository
-import com.zigzag.jobotaserver.user.dto.NewPlatformUserDto
-import com.zigzag.jobotaserver.user.dto.PlatformUserDto
-import com.zigzag.jobotaserver.user.mapper.NewPlatformUserMapper
-import com.zigzag.jobotaserver.user.mapper.PlatformUserMapper
-import com.zigzag.jobotaserver.user.service.IPlatformUserService
+import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
+import com.zigzag.jobotaserver.features.user.dto.NewPlatformUserDto
+import com.zigzag.jobotaserver.features.user.dto.PlatformUserDto
+import com.zigzag.jobotaserver.features.user.mapper.NewPlatformUserMapper
+import com.zigzag.jobotaserver.features.user.mapper.PlatformUserMapper
+import com.zigzag.jobotaserver.features.user.service.IPlatformUserService
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

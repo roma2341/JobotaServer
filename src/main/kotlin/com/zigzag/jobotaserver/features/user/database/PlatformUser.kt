@@ -1,4 +1,4 @@
-package com.zigzag.jobotaserver.user.database
+package com.zigzag.jobotaserver.features.user.database
 
 import com.mongodb.lang.NonNull
 import org.springframework.data.annotation.Id

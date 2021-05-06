@@ -1,12 +1,12 @@
-package com.zigzag.jobotaserver.job.controller
+package com.zigzag.jobotaserver.features.job.controller
 
 import com.zigzag.jobotaserver.core.ICrudRestController
-import com.zigzag.jobotaserver.job.database.JobRepository
-import com.zigzag.jobotaserver.job.dto.JobDto
-import com.zigzag.jobotaserver.job.dto.NewJobDto
-import com.zigzag.jobotaserver.job.mapper.JobMapper
-import com.zigzag.jobotaserver.job.mapper.NewJobMapper
-import com.zigzag.jobotaserver.job.service.IJobService
+import com.zigzag.jobotaserver.features.job.database.JobRepository
+import com.zigzag.jobotaserver.features.job.dto.JobDto
+import com.zigzag.jobotaserver.features.job.dto.NewJobDto
+import com.zigzag.jobotaserver.features.job.mapper.JobMapper
+import com.zigzag.jobotaserver.features.job.mapper.NewJobMapper
+import com.zigzag.jobotaserver.features.job.service.IJobService
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux

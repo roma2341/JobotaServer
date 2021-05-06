@@ -1,4 +1,4 @@
-package com.zigzag.jobotaserver.user.dto
+package com.zigzag.jobotaserver.features.user.dto
 
 data class NewPlatformUserDto(
         val firstName: String?,

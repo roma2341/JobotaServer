@@ -1,8 +1,8 @@
-package com.zigzag.jobotaserver.user.service
+package com.zigzag.jobotaserver.features.user.service
 
-import com.zigzag.jobotaserver.user.database.PlatformUser
-import com.zigzag.jobotaserver.user.database.PlatformUserRepository
-import com.zigzag.jobotaserver.user.mapper.NewPlatformUserMapper
+import com.zigzag.jobotaserver.features.user.database.PlatformUser
+import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
+import com.zigzag.jobotaserver.features.user.mapper.NewPlatformUserMapper
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
