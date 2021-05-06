@@ -1,8 +1,7 @@
-package com.zigzag.jobotaserver.job.database;
+package com.zigzag.jobotaserver.job.database
 
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.stereotype.Repository
 
 @Repository
-interface JobRepository : ReactiveMongoRepository<Job,String> {
-}
+interface JobRepository : ReactiveMongoRepository<Job,String>

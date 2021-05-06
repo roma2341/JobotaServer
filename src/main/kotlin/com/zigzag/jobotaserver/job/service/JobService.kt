@@ -10,18 +10,18 @@ import reactor.core.publisher.Mono
 class JobService(val jobRepository: JobRepository) : IJobService {
 
     override fun all(): Flux<Job> {
-        return jobRepository.findAll();
+        return jobRepository.findAll()
     }
 
     override fun get(modelId: String): Mono<Job> {
-        return jobRepository.findById(modelId);
+        return jobRepository.findById(modelId)
     }
 
     override fun create(model: Job): Mono<Job> {
-        return jobRepository.save(model);
+        return jobRepository.save(model)
     }
 
     override fun delete(userId: String): Mono<Void> {
-        return jobRepository.deleteById(userId);
+        return jobRepository.deleteById(userId)
     }
 }

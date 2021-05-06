@@ -6,6 +6,4 @@ import com.zigzag.jobotaserver.job.dto.JobDto
 import org.mapstruct.Mapper
 
 @Mapper(componentModel = "spring")
-interface JobMapper : SimpleMapper<Job,JobDto> {
-
-}
+interface JobMapper : SimpleMapper<Job,JobDto>

@@ -7,15 +7,15 @@ import reactor.core.publisher.Mono
 @RestController
 interface ICrudRestController<ModelDto,NewModelDto> {
     @GetMapping("/")
-    fun all(): Flux<ModelDto>;
+    fun all(): Flux<ModelDto>
 
     @GetMapping("/{entityId}")
-    fun get(@PathVariable entityId:String): Mono<ModelDto>;
+    fun get(@PathVariable entityId:String): Mono<ModelDto>
 
-    @PostMapping()
-    fun create(entity: NewModelDto): Mono<ModelDto>;
+    @PostMapping
+    fun create(entity: NewModelDto): Mono<ModelDto>
 
-    @DeleteMapping()
-    fun delete(entityId: String): Mono<Void>;
+    @DeleteMapping
+    fun delete(entityId: String): Mono<Void>
 
 }
