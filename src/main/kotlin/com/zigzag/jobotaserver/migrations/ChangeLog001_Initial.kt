@@ -8,10 +8,6 @@ import com.mongodb.BasicDBObject
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.IndexOptions
 
-
-
-
-
 @ChangeLog(order="001")
 class ChangeLog001_Initial {
     @ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
