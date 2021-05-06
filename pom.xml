@@ -160,7 +160,6 @@
 																<correctErrorTypes>true</correctErrorTypes>
                                                                 <sourceDirs>
                                                                     <sourceDir>src/test/kotlin</sourceDir>
-                                                                    <sourceDir>src/test/java</sourceDir>
                                                                 </sourceDirs>
                                                                 <annotationProcessorPaths>
                                                                     <annotationProcessorPath>

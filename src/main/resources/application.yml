@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       database: jobota
-      auto-index-creation: true
+      auto-index-creation: false
   jpa:
     generate-ddl: false
     hibernate:

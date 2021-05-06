@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 class ChangeLog001_Initial {
     @ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
     fun changeWithMongoDatabbase(db: MongoDatabase) {
-         db.createCollection("MyCollection");
+         db.createCollection("users");
      //   val doc: Document = Document("testName", "example").append("test", "1")
         //mycollection.insertOne(doc)
     }

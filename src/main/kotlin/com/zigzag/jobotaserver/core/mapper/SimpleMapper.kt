@@ -5,6 +5,6 @@ import org.mapstruct.MappingTarget
 
 interface SimpleMapper<Model,Dto> {
     fun convertToDto(user: Model) : Dto
-       @InheritInverseConfiguration
-       fun convertToModel(userDto: Dto) : Model
+    @InheritInverseConfiguration
+    fun convertToModel(userDto: Dto) : Model
 }

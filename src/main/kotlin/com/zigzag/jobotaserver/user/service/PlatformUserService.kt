@@ -10,9 +10,21 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
-class PlatformUserService(val userRepository: PlatformUserRepository,val newUserMapper: NewPlatformUserMapper) {
-    fun register(user: NewPlatformUserDto): Mono<PlatformUser> {
-        var model = newUserMapper.convertToModel(user);
+class PlatformUserService(val userRepository: PlatformUserRepository,val newUserMapper: NewPlatformUserMapper) : IPlatformUserService {
+    override fun all(): Flux<PlatformUser> {
+        return userRepository.findAll();
+    }
+
+    override fun get(modelId: String): Mono<PlatformUser> {
+        return userRepository.findById(modelId);
+    }
+
+    override fun create(model: PlatformUser): Mono<PlatformUser> {
         return userRepository.save(model);
     }
+
+    override fun delete(userId: String): Mono<Void> {
+        return userRepository.deleteById(userId);
+    }
+
 }
