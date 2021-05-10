@@ -18,6 +18,11 @@ class JobController(val jobService: IJobService,
                     val jobRepository: JobRepository,
                     val jobMapper:JobMapper,
                     val newJobMapper:NewJobMapper) : ICrudRestController<JobDto,NewJobDto> {
+
+    fun assignExecutor(jobId:String,executorUserId: String):Mono<JobDto>{
+        return jobService.assignExecutor(jobId,executorUserId).map(jobMapper::convertToDto);
+    }
+
     override fun all(): Flux<JobDto> {
         return jobService.all().map(jobMapper::convertToDto)
     }

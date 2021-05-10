@@ -1,6 +1,7 @@
 package com.zigzag.jobotaserver.features.user.database
 
 import com.mongodb.lang.NonNull
+import com.zigzag.jobotaserver.core.database.AbstractAuditingEntity
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
@@ -16,4 +17,4 @@ data class PlatformUser (
 
     val firstName: String?,
     val lastName: String?,
-)
+) : AbstractAuditingEntity()

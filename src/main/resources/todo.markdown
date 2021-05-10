@@ -8,4 +8,6 @@
    2. Get job
    3. Get all jobs
    4. Delete job
+   5. Assign executor
+   6. Finish job
 3. 

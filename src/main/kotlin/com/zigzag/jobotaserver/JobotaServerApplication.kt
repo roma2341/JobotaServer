@@ -2,10 +2,12 @@ package com.zigzag.jobotaserver
 
 import com.github.cloudyrock.spring.v5.EnableMongock
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
+import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing
 
 @SpringBootApplication
-@EnableMongock
+@EnableReactiveMongoAuditing
 class JobotaServerApplication
 
 fun main(args:Array<String>) {

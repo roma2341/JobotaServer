@@ -2,11 +2,11 @@ spring:
   data:
     mongodb:
       database: jobota
-      auto-index-creation: false
+      auto-index-creation: true
   jpa:
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
   main:
     web-application-type: reactive
 logLevel: DEBUG
