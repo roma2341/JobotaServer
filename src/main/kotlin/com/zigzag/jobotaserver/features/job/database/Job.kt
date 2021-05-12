@@ -12,12 +12,13 @@ import java.time.LocalDateTime
 @Document(collection="job")
 data class Job(
     @Id
-    val id:String?,
+    val id:String? = null,
     @DBRef
     val author:PlatformUser,
 
-    var name:String,
-    var description:String,
+    var name:String? = null,
+    var description:String? = null,
+    var completedAt: LocalDateTime? = null,
     @DBRef
-    var executor:PlatformUser,
+    var executor:PlatformUser? = null,
 ) : AbstractAuditingEntity()

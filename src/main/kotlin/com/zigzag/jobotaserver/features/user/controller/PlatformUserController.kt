@@ -28,7 +28,7 @@ class PlatformUserController(val userService: IPlatformUserService,
             .map(userMapper::convertToDto)
     }
 
-    override fun create(entity: NewPlatformUserDto): Mono<PlatformUserDto> {
+    override fun create(@RequestBody entity: NewPlatformUserDto): Mono<PlatformUserDto> {
         return userService
             .create(newUserMapper.convertToModel(entity))
             .map(userMapper::convertToDto)

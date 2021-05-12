@@ -9,7 +9,9 @@ spring:
       ddl-auto: create-drop
   main:
     web-application-type: reactive
-logLevel: DEBUG
+  profiles:
+    active: dev
+logLevel: INFO
 mongock:
   mongo-db:
     write-concern:

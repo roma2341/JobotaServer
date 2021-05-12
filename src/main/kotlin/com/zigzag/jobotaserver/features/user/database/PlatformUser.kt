@@ -9,12 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "users")
 data class PlatformUser (
     @Id
-    val id: String?,
+    var id: String? = null,
 
     @Indexed(unique=true)
     @NonNull
     val email:String,
 
-    val firstName: String?,
-    val lastName: String?,
+    var firstName: String? = null,
+    var lastName: String? = null ,
 ) : AbstractAuditingEntity()
