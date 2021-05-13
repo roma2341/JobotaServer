@@ -41,7 +41,7 @@ constructor
 
     @AfterEach
     fun clearCollection() {
-        //mongoTemplate.dropCollection(PlatformUser::class.java);
+        /*Don't drop collection, because it destroy indexes and they won't be recreated*/
         mongoTemplate.remove(BasicQuery("{}"),PlatformUser::class.java);
     }
 
@@ -52,8 +52,7 @@ constructor
             lastName = "lastName",
             email="test@org.com"
         )
-        //var userDTO = Mappers.getMapper(PlatformUserMapper::class.java).convertToDto(platformUser);
-        //Mockito.`when`(platformUserService!!.create(platformUser)).thenReturn(Mono.just(platformUser));
+
         webClient.post()
             .uri(BASE_URL)
             .contentType(MediaType.APPLICATION_JSON)
@@ -64,9 +63,6 @@ constructor
             .json("{\n  \"firstName\": \"testName\",\n  \"lastName\": \"lastName\"," +
                     "\n  \"email\": \"test@org.com\"\n}" +
                     "")
-            //.expectBody(PlatformUser::class.java
-            //.consumeWith{result -> Assertions.assertEquals(platformUser,result.responseBody)}
-        //Mockito.verify(platformUserService, times(1))!!.create(platformUser)
     }
 
     @Test
