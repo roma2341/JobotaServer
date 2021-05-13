@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @RestController
 interface ICrudRestController<ModelDto,NewModelDto> {
     @GetMapping("/")

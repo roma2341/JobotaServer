@@ -4,6 +4,10 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDateTime
 
+/**
+ * Basic auditing entity
+ * @author  Roman Zinchuk
+ */
 abstract class AbstractAuditingEntity (
     @CreatedDate
     var createdAt: LocalDateTime? = null,

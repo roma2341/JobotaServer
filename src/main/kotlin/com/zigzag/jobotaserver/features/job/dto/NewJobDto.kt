@@ -2,6 +2,10 @@ package com.zigzag.jobotaserver.features.job.dto
 
 import com.zigzag.jobotaserver.features.user.dto.PlatformUserDto
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 data class NewJobDto (
     val id:String,
     val name:String,

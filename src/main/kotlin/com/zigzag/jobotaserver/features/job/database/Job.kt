@@ -9,6 +9,10 @@ import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @Document(collection="job")
 data class Job(
     @Id

@@ -5,5 +5,9 @@ import com.zigzag.jobotaserver.features.user.database.PlatformUser
 import com.zigzag.jobotaserver.features.user.dto.PlatformUserDto
 import org.mapstruct.Mapper
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @Mapper(componentModel = "spring")
 interface PlatformUserMapper : SimpleMapper<PlatformUser,PlatformUserDto>

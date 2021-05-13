@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @Service
 class PlatformUserService(val userRepository: PlatformUserRepository,val newUserMapper: NewPlatformUserMapper) : IPlatformUserService {
     override fun all(): Flux<PlatformUser> {

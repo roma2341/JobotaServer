@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @RestController
 @RequestMapping("job")
 class JobController(val jobService: IJobService,

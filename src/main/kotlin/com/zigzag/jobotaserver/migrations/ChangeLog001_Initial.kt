@@ -13,7 +13,11 @@ import org.springframework.data.mongodb.core.schema.MongoJsonSchema
 
 
 
-
+/**
+ *Deprecated
+ * @author  Roman Zinchuk
+ */
+@Deprecated("maybe later")
 @ChangeLog(order="001")
 class ChangeLog001_Initial {
    /* @ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")

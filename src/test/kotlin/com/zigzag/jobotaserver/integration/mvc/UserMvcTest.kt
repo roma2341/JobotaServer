@@ -23,7 +23,10 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 
-
+/**
+ * Basic MVC Test
+ * @author  Roman Zinchuk
+ */
 val BASE_URL = "/user";
 @ActiveProfiles("test")
 @SpringBootTest

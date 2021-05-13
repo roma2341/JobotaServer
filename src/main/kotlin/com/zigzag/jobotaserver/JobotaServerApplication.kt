@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
 import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @SpringBootApplication
 @EnableReactiveMongoAuditing
 class JobotaServerApplication

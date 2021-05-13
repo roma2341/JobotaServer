@@ -10,6 +10,10 @@ import reactor.core.publisher.Mono
 import reactor.util.function.Tuples
 import java.time.LocalDateTime
 
+/**
+ *
+ * @author  Roman Zinchuk
+ */
 @Service
 class JobService(val jobRepository: JobRepository,
 val userRepository: PlatformUserRepository,val dateHelper: IDateHelper) : IJobService {
