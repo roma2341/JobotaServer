@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono
  */
 @RestController
 interface ICrudRestController<ModelDto,NewModelDto> {
-    @GetMapping("/")
+    @GetMapping
     fun all(): Flux<ModelDto>
 
     @GetMapping("/{entityId}")

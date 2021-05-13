@@ -1,5 +1,6 @@
 package com.zigzag.jobotaserver.integration.mvc
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.zigzag.jobotaserver.config.DevSecurityConfig
 import com.zigzag.jobotaserver.features.user.database.PlatformUser
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
@@ -22,6 +23,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
+import java.util.*
 
 /**
  * Basic MVC Test
@@ -39,7 +41,8 @@ constructor
 (
  private val webClient: WebTestClient,
  private val platformUserRepository: PlatformUserRepository,
- private val mongoTemplate: MongoTemplate
+ private val mongoTemplate: MongoTemplate,
+ private val objectMapper: ObjectMapper
 ) {
 
     @AfterEach
@@ -85,6 +88,7 @@ constructor
             .json("{\n  \"firstName\": \"testName\",\n  \"lastName\": \"lastName\"," +
                     "\n  \"email\": \"test@org.com\"\n}" +
                     "")
+            .jsonPath("$.id").isNotEmpty()
     }
 
     @Test
@@ -101,6 +105,46 @@ constructor
             .body(BodyInserters.fromValue<Any>(platformUser))
             .exchange()
             .expectStatus().is4xxClientError()
+    }
+
+    @Test
+    fun test_get_user_by_id(){
+        val platformUser = PlatformUser(
+            firstName = "testName",
+            lastName = "lastName",
+            email="test@org.com"
+        )
+        val createdUser = platformUserRepository.save(platformUser).block();
+        webClient.get()
+            .uri(BASE_URL + "/" + createdUser.id)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful()
+            .expectBody()
+            .json("{\n  \"firstName\": \"testName\",\n  \"lastName\": \"lastName\"," +
+            "\n  \"email\": \"test@org.com\"\n}" +
+            "")
+    }
+
+    @Test
+    fun test_get_all_users(){
+        val platformUser1 = PlatformUser(
+            firstName = "testName",
+            lastName = "lastName",
+            email="test@org.com"
+        )
+        val platformUser2 = PlatformUser(
+            firstName = "testName",
+            lastName = "lastName",
+            email="test2@org.com"
+        )
+        platformUserRepository.saveAll(listOf(platformUser1,platformUser2)).blockLast()
+        webClient.get()
+            .uri(BASE_URL)
+            .exchange()
+            .expectStatus().is2xxSuccessful
+            .expectBodyList(PlatformUser::class.java)
+            .hasSize(2)
     }
 
 }
