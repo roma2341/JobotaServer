@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing
  */
 @SpringBootApplication
 @EnableReactiveMongoAuditing
+@EnableMongock
 class JobotaServerApplication
 
 fun main(args:Array<String>) {

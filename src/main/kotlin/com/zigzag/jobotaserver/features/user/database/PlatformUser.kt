@@ -21,4 +21,5 @@ data class PlatformUser (
 
     var firstName: String? = null,
     var lastName: String? = null ,
+    var password: String? = null
 ) : AbstractAuditingEntity()

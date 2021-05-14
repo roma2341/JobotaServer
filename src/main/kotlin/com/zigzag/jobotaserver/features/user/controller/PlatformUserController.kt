@@ -7,6 +7,7 @@ import com.zigzag.jobotaserver.features.user.dto.PlatformUserDto
 import com.zigzag.jobotaserver.features.user.mapper.NewPlatformUserMapper
 import com.zigzag.jobotaserver.features.user.mapper.PlatformUserMapper
 import com.zigzag.jobotaserver.features.user.service.IPlatformUserService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

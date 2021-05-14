@@ -8,6 +8,8 @@ import com.zigzag.jobotaserver.features.user.mapper.NewPlatformUserMapperImpl
 import com.zigzag.jobotaserver.features.user.mapper.PlatformUserMapperImpl
 import com.zigzag.jobotaserver.features.user.service.IPlatformUserService
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.mockito.verification.After
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +22,7 @@ import org.springframework.data.mongodb.core.query.CriteriaDefinition
 import org.springframework.data.mongodb.core.query.TextCriteria
 import org.springframework.data.mongodb.core.query.TextQuery
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
@@ -34,6 +37,7 @@ val BASE_URL = "/user";
 @SpringBootTest
 //@WebFluxTest(controllers=[PlatformUserController::class])
 @AutoConfigureWebTestClient
+@WithMockUser()//username = "t@t.t",password = "p")
 @Import(value=[DevSecurityConfig::class, NewPlatformUserMapperImpl::class,PlatformUserMapperImpl::class])
 class UserMvcTest
 @Autowired
@@ -52,11 +56,12 @@ constructor
     }
 
     @Test
-    fun test_create_employee() {
+    fun test_create_user() {
         val platformUser = PlatformUser(
             firstName = "testName",
             lastName = "lastName",
-            email="test@org.com"
+            email="test@org.com",
+            password = "testpass"
         )
 
         webClient.post()
@@ -76,7 +81,8 @@ constructor
         val platformUser = PlatformUser(
             firstName = "testName",
             lastName = "lastName",
-            email="test@org.com"
+            email="test@org.com",
+            password = "testpass"
         )
         webClient.post()
             .uri(BASE_URL)
@@ -96,7 +102,8 @@ constructor
         val platformUser = PlatformUser(
             firstName = "testName",
             lastName = "lastName",
-            email="test@org.com"
+            email="test@org.com",
+            password = "testpass"
         )
         platformUserRepository.save(platformUser).block()
         webClient.post()
@@ -112,7 +119,8 @@ constructor
         val platformUser = PlatformUser(
             firstName = "testName",
             lastName = "lastName",
-            email="test@org.com"
+            email="test@org.com",
+            password = "testpass"
         )
         val createdUser = platformUserRepository.save(platformUser).block();
         webClient.get()
@@ -131,12 +139,14 @@ constructor
         val platformUser1 = PlatformUser(
             firstName = "testName",
             lastName = "lastName",
-            email="test@org.com"
+            email="test@org.com",
+            password = "testpass"
         )
         val platformUser2 = PlatformUser(
             firstName = "testName",
             lastName = "lastName",
-            email="test2@org.com"
+            email="test2@org.com",
+            password = "testpass"
         )
         platformUserRepository.saveAll(listOf(platformUser1,platformUser2)).blockLast()
         webClient.get()
@@ -145,6 +155,15 @@ constructor
             .expectStatus().is2xxSuccessful
             .expectBodyList(PlatformUser::class.java)
             .hasSize(2)
+    }
+
+    @Test
+    fun test_delete_user_by_id(){
+        val createdUser = platformUserRepository.save(PlatformUser(email="test@org.com")).block()
+        webClient.delete()
+            .uri(BASE_URL + "/" + createdUser.id)
+            .exchange()
+        Assertions.assertNotNull(platformUserRepository.findById(createdUser.id).block());
     }
 
 }
