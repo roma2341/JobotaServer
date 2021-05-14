@@ -1,6 +1,5 @@
 package com.zigzag.jobotaserver.core.rest
 
-import com.zigzag.jobotaserver.features.user.database.PlatformUser
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.jsonwebtoken.Jwts
@@ -16,13 +15,14 @@ import java.util.*
 class JwtSigner {
     val keyPair: KeyPair = Keys.keyPairFor(SignatureAlgorithm.RS256)
 
-    fun createJwt(userId: String): String {
+    fun createJwt(userId: String,permissions:List<String>): String {
         return Jwts.builder()
             .signWith(keyPair.private, SignatureAlgorithm.RS256)
             .setSubject(userId)
             .setIssuer("identity")
             .setExpiration(Date.from(Instant.now().plus(Duration.ofMinutes(15))))
             .setIssuedAt(Date.from(Instant.now()))
+            .claim("permissions",permissions)
             .compact()
     }
 
@@ -34,16 +34,16 @@ class JwtSigner {
     }
 
     fun getEmailFromToken(token: String?): String? {
-        return getClaimFromToken(token, { obj: Claims -> obj.subject }) as String
+        return getClaimValueFromToken(token, { obj: Claims -> obj.subject }) as String
     }
 
     fun getExpirationDateFromToken(token: String?): Date {
-        return getClaimFromToken(token, { obj: Claims -> obj.expiration }) as Date
+        return getClaimValueFromToken(token, { obj: Claims -> obj.expiration }) as Date
     }
 
-    fun getClaimFromToken(token: String?, claimsResolver: Function<Any>): Any {
+    fun getClaimValueFromToken(token: String?, claimsResolver: (Claims)->Any): Any {
         val claims = getAllClaimsFromToken(token)
-        return claimsResolver.apply({claims})
+        return claimsResolver(claims)
     }
 
     fun getAllClaimsFromToken(token: String?): Claims {

@@ -25,7 +25,7 @@ class AuthController(
         return userRepository.findOneByEmail(userCredential.email)
             .map { user ->
                 if (passwordEncoder.matches(userCredential.password, user.password)) {
-                     ResponseEntity.ok((AuthResponse(jwtSigner.createJwt(user.id!!)))) as ResponseEntity<Any>
+                     ResponseEntity.ok((AuthResponse(jwtSigner.createJwt(user.id!!,user.roles!!)))) as ResponseEntity<Any>
                 } else {
                      ResponseEntity.badRequest().body("Error") as ResponseEntity<String>
                 }

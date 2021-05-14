@@ -4,6 +4,7 @@ import com.zigzag.jobotaserver.core.helpers.IDateHelper
 import com.zigzag.jobotaserver.features.job.database.Job
 import com.zigzag.jobotaserver.features.job.database.JobRepository
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
+import org.springframework.security.core.context.ReactiveSecurityContextHolder
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -41,7 +42,10 @@ val userRepository: PlatformUserRepository,val dateHelper: IDateHelper) : IJobSe
     }
 
     override fun create(model: Job): Mono<Job> {
-        return jobRepository.save(model)
+        return ReactiveSecurityContextHolder.getContext().flatMap{
+            context -> context.authentication
+            jobRepository.save(model)
+        }
     }
 
     override fun delete(userId: String): Mono<Void> {
