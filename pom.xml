@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.4.32</kotlin.version>
-		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
+		<kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
 		<liquibase-mongodb.version>4.3.2</liquibase-mongodb.version>
 		<liquibase.version>4.2.1</liquibase.version>

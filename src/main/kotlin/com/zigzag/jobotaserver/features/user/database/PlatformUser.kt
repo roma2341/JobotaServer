@@ -17,7 +17,7 @@ data class PlatformUser (
 
     @Indexed(unique=true)
     @NonNull
-    val email:String,
+    var email:String,
 
     var firstName: String? = null,
     var lastName: String? = null ,

@@ -14,15 +14,14 @@ import java.time.LocalDateTime
  * @author  Roman Zinchuk
  */
 @Document(collection="job")
-data class Job(
+data class PlatformJob(
     @Id
     val id:String? = null,
-    @DBRef
-    val author:PlatformUser,
-
     var name:String? = null,
     var description:String? = null,
     var completedAt: LocalDateTime? = null,
     @DBRef
     var executor:PlatformUser? = null,
+    @DBRef
+    val author:PlatformUser? = null,
 ) : AbstractAuditingEntity()

@@ -21,10 +21,10 @@ interface ICrudRestController<ModelDto,NewModelDto> {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(entity: NewModelDto): Mono<ModelDto>
+    fun create(@RequestBody entity: NewModelDto): Mono<ModelDto>
 
-    @DeleteMapping
-    fun delete(entityId: String): Mono<Void>
+    @DeleteMapping("/{entityId}")
+    fun delete(@PathVariable entityId: String): Mono<Void>
 
     @ExceptionHandler
     fun handleDuplicateKeyException(ex: DuplicateKeyException?): ResponseEntity<*>? {

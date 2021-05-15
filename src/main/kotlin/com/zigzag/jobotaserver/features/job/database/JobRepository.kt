@@ -8,4 +8,4 @@ import org.springframework.stereotype.Repository
  * @author  Roman Zinchuk
  */
 @Repository
-interface JobRepository : ReactiveMongoRepository<Job,String>
+interface JobRepository : ReactiveMongoRepository<PlatformJob,String>

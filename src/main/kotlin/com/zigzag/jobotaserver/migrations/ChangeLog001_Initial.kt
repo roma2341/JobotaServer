@@ -27,7 +27,7 @@ class ChangeLog001_Initial {
     @ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
     fun initTestUsers( userService: IPlatformUserService){
         val testUser = PlatformUser(email="t@t.t",password = "p",roles = listOf("admin","test"));
-        userService.create(testUser).block();
+        //userService.create(testUser).block();
     }
     /*@ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
     fun changeWithMongoDatabase(db: MongoDatabase) {
