@@ -25,7 +25,7 @@ class AppAuthenticationManager (
         }
         return if (email != null && !jwtSigner.isTokenExpired(authToken)) {
             val claims: Claims = jwtSigner.getAllClaimsFromToken(authToken)
-            val roles = claims.get("authorities") as List<String>;
+            val roles = claims.get("roles") as List<String>;
             val authorities = roles.stream().map { role: String ->
                 SimpleGrantedAuthority(
                     role

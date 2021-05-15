@@ -26,7 +26,7 @@ import org.springframework.data.mongodb.core.schema.MongoJsonSchema
 class ChangeLog001_Initial {
     @ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
     fun initTestUsers( userService: IPlatformUserService){
-        val testUser = PlatformUser(email="t@t.t",password = "p",permissions = listOf("admin","test"));
+        val testUser = PlatformUser(email="t@t.t",password = "p",roles = listOf("admin","test"));
         userService.create(testUser).block();
     }
     /*@ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")

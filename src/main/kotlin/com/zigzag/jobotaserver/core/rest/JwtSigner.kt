@@ -15,14 +15,14 @@ import java.util.*
 class JwtSigner {
     val keyPair: KeyPair = Keys.keyPairFor(SignatureAlgorithm.RS256)
 
-    fun createJwt(userId: String,permissions:List<String>): String {
+    fun createJwt(userId: String,roles:List<String>): String {
         return Jwts.builder()
             .signWith(keyPair.private, SignatureAlgorithm.RS256)
             .setSubject(userId)
             .setIssuer("identity")
             .setExpiration(Date.from(Instant.now().plus(Duration.ofMinutes(15))))
             .setIssuedAt(Date.from(Instant.now()))
-            .claim("permissions",permissions)
+            .claim("roles",roles)
             .compact()
     }
 
