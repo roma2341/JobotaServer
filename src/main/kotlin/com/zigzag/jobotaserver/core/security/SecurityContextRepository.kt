@@ -1,4 +1,4 @@
-package com.zigzag.jobotaserver.core.rest
+package com.zigzag.jobotaserver.core.security
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

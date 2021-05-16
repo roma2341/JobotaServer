@@ -23,5 +23,5 @@ data class PlatformJob(
     @DBRef
     var executor:PlatformUser? = null,
     @DBRef
-    val author:PlatformUser? = null,
+    var author:PlatformUser? = null,
 ) : AbstractAuditingEntity()

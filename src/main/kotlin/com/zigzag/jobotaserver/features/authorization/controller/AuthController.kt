@@ -1,6 +1,6 @@
 package com.zigzag.jobotaserver.features.authorization.controller
 
-import com.zigzag.jobotaserver.core.rest.JwtSigner
+import com.zigzag.jobotaserver.core.security.JwtSigner
 import com.zigzag.jobotaserver.features.authorization.model.AuthResponse
 import com.zigzag.jobotaserver.features.authorization.model.UserCredentials
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository

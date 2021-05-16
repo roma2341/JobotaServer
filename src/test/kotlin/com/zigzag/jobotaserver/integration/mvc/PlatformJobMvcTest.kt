@@ -8,6 +8,7 @@ import com.zigzag.jobotaserver.features.user.database.PlatformUser
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
 import com.zigzag.jobotaserver.helpers.TestHelperUser
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +26,7 @@ import org.springframework.web.reactive.function.BodyInserters
 @ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureWebTestClient
-@WithMockUser()
+@WithMockUser("12345")
 @Import(value=[DevSecurityConfig::class])
 class PlatformJobMvcTest
 @Autowired
@@ -39,6 +40,11 @@ constructor
 ){
     val BASE_URL = "/job";
 
+    @BeforeEach
+    fun initTestUser(){
+        userRepository.save(PlatformUser(id="12345", email ="unique-test-user@org.com")).block();
+    }
+
     @AfterEach
     fun clearCollection() {
         /*Don't drop collection, because it destroy indexes and they won't be recreated*/
@@ -49,11 +55,9 @@ constructor
     @Test
     fun test_create_job() {
         val user = testHelperUser.createTestUser();
-        val createdUser = userRepository.save(user).block();
         val job = PlatformJob(
             name = "testJob",
             description = "description",
-            author = createdUser
         )
         webClient.post()
             .uri(BASE_URL)
@@ -62,8 +66,9 @@ constructor
             .exchange()
             .expectStatus().isCreated
             .expectBody()
-            .jsonPath("$.name").isEqualTo("testJob")
-            .jsonPath("$.description").isEqualTo("description")
+            .jsonPath("$.name").isEqualTo(job.name)
+            .jsonPath("$.description").isEqualTo(job.description)
+            .jsonPath("$.author.id").isEqualTo("12345")
             //.jsonPath("$.author").isEqualTo(user.id)
     }
 

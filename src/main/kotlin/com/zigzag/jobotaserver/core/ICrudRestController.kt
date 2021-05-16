@@ -21,7 +21,7 @@ interface ICrudRestController<ModelDto,NewModelDto> {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody entity: NewModelDto): Mono<ModelDto>
+    fun create(@RequestBody dto: NewModelDto): Mono<ModelDto>
 
     @DeleteMapping("/{entityId}")
     fun delete(@PathVariable entityId: String): Mono<Void>

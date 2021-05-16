@@ -1,7 +1,7 @@
 package com.zigzag.jobotaserver.config
 
-import com.zigzag.jobotaserver.core.rest.AppAuthenticationManager
-import com.zigzag.jobotaserver.core.rest.SecurityContextRepository
+import com.zigzag.jobotaserver.core.security.AppAuthenticationManager
+import com.zigzag.jobotaserver.core.security.SecurityContextRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

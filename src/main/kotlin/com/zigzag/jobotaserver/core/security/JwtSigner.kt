@@ -1,4 +1,4 @@
-package com.zigzag.jobotaserver.core.rest
+package com.zigzag.jobotaserver.core.security
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
@@ -33,7 +33,7 @@ class JwtSigner {
             .parseClaimsJws(jwt)
     }
 
-    fun getEmailFromToken(token: String?): String? {
+    fun getUserIdFromToken(token: String?): String? {
         return getClaimValueFromToken(token, { obj: Claims -> obj.subject }) as String
     }
 

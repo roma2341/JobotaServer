@@ -1,4 +1,4 @@
-package com.zigzag.jobotaserver.core.rest
+package com.zigzag.jobotaserver.core.security
 
 import io.jsonwebtoken.Claims
 import org.springframework.security.authentication.ReactiveAuthenticationManager
@@ -17,13 +17,13 @@ class AppAuthenticationManager (
     ): ReactiveAuthenticationManager {
     override fun authenticate(authentication: Authentication): Mono<Authentication> {
         val authToken: String = authentication.getCredentials().toString()
-        val email: String?
-        email = try {
-            jwtSigner.getEmailFromToken(authToken)
+        val userId: String?
+        userId = try {
+            jwtSigner.getUserIdFromToken(authToken)
         } catch (e: Exception) {
             null
         }
-        return if (email != null && !jwtSigner.isTokenExpired(authToken)) {
+        return if (userId != null && !jwtSigner.isTokenExpired(authToken)) {
             val claims: Claims = jwtSigner.getAllClaimsFromToken(authToken)
             val roles = claims.get("roles") as List<String>;
             val authorities = roles.stream().map { role: String ->
@@ -31,8 +31,8 @@ class AppAuthenticationManager (
                     role
                 )
             }.collect(Collectors.toList())
-            val auth = UsernamePasswordAuthenticationToken(email, email, authorities)
-            SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(email, authorities)
+            val auth = UsernamePasswordAuthenticationToken(userId, userId, authorities)
+            SecurityContextHolder.getContext().authentication = UsernamePasswordAuthenticationToken(userId, authorities)
             Mono.just(auth)
         } else { Mono.empty() }
     }
