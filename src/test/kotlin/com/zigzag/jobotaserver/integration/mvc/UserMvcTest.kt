@@ -34,8 +34,7 @@ import java.util.*
 @ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureWebTestClient
-@WithMockUser()//username = "t@t.t",password = "p")
-//@Import(value=[DevSecurityConfig::class, NewPlatformUserMapperImpl::class,PlatformUserMapperImpl::class])
+@WithMockUser()
 @Import(value=[DevSecurityConfig::class])
 class UserMvcTest
 @Autowired

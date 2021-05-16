@@ -28,7 +28,7 @@ class PlatformJobController(val jobService: IJobService,
                             val jobMapper:JobMapper,
                             val newJobMapper:NewJobMapper,
                             val userRepository: PlatformUserRepository,
-                            val securityUtils: SecurityUtils) : ICrudRestController<PlatformJobDto,NewPlatformJobDto> {
+                            ) : ICrudRestController<PlatformJobDto,NewPlatformJobDto> {
 
     fun assignExecutor(jobId:String,executorUserId: String):Mono<PlatformJobDto>{
         return jobService.assignExecutor(jobId,executorUserId).map(jobMapper::convertToDto);
@@ -43,15 +43,10 @@ class PlatformJobController(val jobService: IJobService,
     }
 
     override fun create(dto: NewPlatformJobDto): Mono<PlatformJobDto> {
-        return securityUtils.getCurrentUserId()
-            .flatMap { userRepository.findById(it)}
-            .map{
-                val entity = newJobMapper.convertToModel(dto)
-                entity.author = it;
-                entity
-        }.flatMap {
-            jobRepository.save(it)
-        }.map(jobMapper::convertToDto)
+        val entity = newJobMapper.convertToModel(dto);
+        return jobService.create(entity).map{
+            jobMapper.convertToDto(it)
+        }
     }
 
     override fun delete(entityId: String): Mono<Void> {

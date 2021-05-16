@@ -1,6 +1,7 @@
 package com.zigzag.jobotaserver.features.job.service
 
 import com.zigzag.jobotaserver.core.helpers.IDateHelper
+import com.zigzag.jobotaserver.core.security.utils.SecurityUtils
 import com.zigzag.jobotaserver.features.job.database.PlatformJob
 import com.zigzag.jobotaserver.features.job.database.JobRepository
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
@@ -16,7 +17,8 @@ import reactor.util.function.Tuples
  */
 @Service
 class JobService(val jobRepository: JobRepository,
-val userRepository: PlatformUserRepository,val dateHelper: IDateHelper) : IJobService {
+val userRepository: PlatformUserRepository,val dateHelper: IDateHelper,val securityUtils: SecurityUtils
+) : IJobService {
 
     override fun assignExecutor(jobId: String, executorUserId: String): Mono<PlatformJob> {
         return Mono.zip(jobRepository.findById(jobId),userRepository.findById(executorUserId), Tuples::of).flatMap { tuple ->
@@ -41,10 +43,14 @@ val userRepository: PlatformUserRepository,val dateHelper: IDateHelper) : IJobSe
     }
 
     override fun create(model: PlatformJob): Mono<PlatformJob> {
-        return ReactiveSecurityContextHolder.getContext().flatMap{
-            context -> context.authentication
-            jobRepository.save(model)
-        }
+        return securityUtils.getCurrentUserId()
+            .flatMap { userRepository.findById(it)}
+            .map{
+                model.author = it;
+                model
+            }.flatMap {
+                jobRepository.save(it)
+            }
     }
 
     override fun delete(userId: String): Mono<Void> {
