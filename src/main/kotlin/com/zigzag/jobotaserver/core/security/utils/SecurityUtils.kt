@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 class SecurityUtils {
     fun getCurrentUserId(): Mono<String> {
         return ReactiveSecurityContextHolder.getContext().map {
-            val userDetails = it.getAuthentication() as UsernamePasswordAuthenticationToken
+            val userDetails = it.authentication as UsernamePasswordAuthenticationToken
             userDetails.name
         }
     }

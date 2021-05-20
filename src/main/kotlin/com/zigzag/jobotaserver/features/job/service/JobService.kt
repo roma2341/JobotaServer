@@ -2,10 +2,9 @@ package com.zigzag.jobotaserver.features.job.service
 
 import com.zigzag.jobotaserver.core.helpers.IDateHelper
 import com.zigzag.jobotaserver.core.security.utils.SecurityUtils
-import com.zigzag.jobotaserver.features.job.database.PlatformJob
 import com.zigzag.jobotaserver.features.job.database.JobRepository
+import com.zigzag.jobotaserver.features.job.database.PlatformJob
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
-import org.springframework.security.core.context.ReactiveSecurityContextHolder
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -23,9 +22,9 @@ val userRepository: PlatformUserRepository,val dateHelper: IDateHelper,val secur
     override fun assignExecutor(jobId: String, executorUserId: String): Mono<PlatformJob> {
         return Mono.zip(jobRepository.findById(jobId),userRepository.findById(executorUserId), Tuples::of).flatMap { tuple ->
             tuple.t1.executor = tuple.t2
-            tuple.t1;
-            jobRepository.save(tuple.t1);
-        };
+            tuple.t1
+            jobRepository.save(tuple.t1)
+        }
     }
 
     override fun completeJob(jobId:String): Mono<PlatformJob> {
@@ -46,7 +45,7 @@ val userRepository: PlatformUserRepository,val dateHelper: IDateHelper,val secur
         return securityUtils.getCurrentUserId()
             .flatMap { userRepository.findById(it)}
             .map{
-                model.author = it;
+                model.author = it
                 model
             }.flatMap {
                 jobRepository.save(it)

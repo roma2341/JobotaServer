@@ -7,5 +7,5 @@ import java.time.LocalDateTime
  * @author  Roman Zinchuk
  */
 interface IDateHelper {
-    fun now(): LocalDateTime;
+    fun now(): LocalDateTime
 }

@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono
  * @author  Roman Zinchuk
  */
 interface IJobService : ICrudService<PlatformJob> {
-    fun assignExecutor(jobId:String, executorUserId:String): Mono<PlatformJob>;
-    fun completeJob(jobId:String): Mono<PlatformJob>;
+    fun assignExecutor(jobId:String, executorUserId:String): Mono<PlatformJob>
+    fun completeJob(jobId:String): Mono<PlatformJob>
 }

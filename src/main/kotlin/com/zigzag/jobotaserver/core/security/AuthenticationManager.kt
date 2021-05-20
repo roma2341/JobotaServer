@@ -16,16 +16,15 @@ class AppAuthenticationManager (
     private val jwtSigner: JwtSigner
     ): ReactiveAuthenticationManager {
     override fun authenticate(authentication: Authentication): Mono<Authentication> {
-        val authToken: String = authentication.getCredentials().toString()
-        val userId: String?
-        userId = try {
+        val authToken: String = authentication.credentials.toString()
+        val userId: String? = try {
             jwtSigner.getUserIdFromToken(authToken)
         } catch (e: Exception) {
             null
         }
         return if (userId != null && !jwtSigner.isTokenExpired(authToken)) {
             val claims: Claims = jwtSigner.getAllClaimsFromToken(authToken)
-            val roles = claims.get("roles") as List<String>;
+            val roles = claims["roles"] as List<String>
             val authorities = roles.stream().map { role: String ->
                 SimpleGrantedAuthority(
                     role

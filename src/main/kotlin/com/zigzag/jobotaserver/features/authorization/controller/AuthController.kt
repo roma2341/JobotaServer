@@ -21,7 +21,7 @@ class AuthController(
     private val jwtSigner: JwtSigner
 ) {
     @PostMapping("/login")
-    open fun login(@RequestBody userCredential: UserCredentials): Mono<ResponseEntity<*>> {
+    fun login(@RequestBody userCredential: UserCredentials): Mono<ResponseEntity<*>> {
         return userRepository.findOneByEmail(userCredential.email)
             .map { user ->
                 if (passwordEncoder.matches(userCredential.password, user.password)) {

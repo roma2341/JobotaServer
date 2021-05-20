@@ -7,8 +7,8 @@ import com.zigzag.jobotaserver.features.user.dto.PlatformUserDto
 import com.zigzag.jobotaserver.features.user.mapper.NewPlatformUserMapper
 import com.zigzag.jobotaserver.features.user.mapper.PlatformUserMapper
 import com.zigzag.jobotaserver.features.user.service.IPlatformUserService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
@@ -34,7 +34,7 @@ class PlatformUserController(val userService: IPlatformUserService,
     }
 
     override fun create(dto: NewPlatformUserDto): Mono<PlatformUserDto> {
-        var entity = newUserMapper.convertToModel(dto)
+        val entity = newUserMapper.convertToModel(dto)
         return userService
             .create(entity)
             .map(userMapper::convertToDto)

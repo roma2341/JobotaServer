@@ -34,11 +34,11 @@ class JwtSigner {
     }
 
     fun getUserIdFromToken(token: String?): String? {
-        return getClaimValueFromToken(token, { obj: Claims -> obj.subject }) as String
+        return getClaimValueFromToken(token) { obj: Claims -> obj.subject } as String
     }
 
     fun getExpirationDateFromToken(token: String?): Date {
-        return getClaimValueFromToken(token, { obj: Claims -> obj.expiration }) as Date
+        return getClaimValueFromToken(token) { obj: Claims -> obj.expiration } as Date
     }
 
     fun getClaimValueFromToken(token: String?, claimsResolver: (Claims)->Any): Any {
@@ -51,7 +51,7 @@ class JwtSigner {
             .setSigningKey(keyPair.public)
              .build()
             .parseClaimsJws(token)
-            .getBody()
+            .body
     }
 
     fun isTokenExpired(token: String): Boolean {

@@ -1,15 +1,17 @@
 package com.zigzag.jobotaserver.integration.mvc
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.zigzag.jobotaserver.config.DevSecurityConfig
-import com.zigzag.jobotaserver.features.job.database.PlatformJob
 import com.zigzag.jobotaserver.features.job.database.JobRepository
+import com.zigzag.jobotaserver.features.job.database.PlatformJob
 import com.zigzag.jobotaserver.features.job.service.JobService
 import com.zigzag.jobotaserver.features.user.database.PlatformUser
 import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
 import com.zigzag.jobotaserver.helpers.TestHelperJob
 import com.zigzag.jobotaserver.helpers.TestHelperUser
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
@@ -39,11 +41,13 @@ constructor
     private val testHelperUser: TestHelperUser,
     private val testHelperJob: TestHelperJob
 ){
-    val BASE_URL = "/job";
+    companion object {
+        const val BASE_URL = "/job"
+    }
 
     @BeforeEach
     fun initTestUser(){
-        userRepository.save(testHelperUser.createCurrentUser()).block();
+        userRepository.save(testHelperUser.createCurrentUser()).block()
     }
 
     @AfterEach
@@ -55,7 +59,7 @@ constructor
 
     @Test
     fun test_create_job() {
-        val user = testHelperUser.createTestUser();
+        val user = testHelperUser.createTestUser()
         val job = PlatformJob(
             name = "testJob",
             description = "description",
@@ -106,6 +110,6 @@ constructor
             .uri(BASE_URL + "/" + createdJob.id)
             .exchange()
             .expectStatus().is2xxSuccessful
-        Assertions.assertNull(jobRepository.findById(createdJob.id).block());
+        Assertions.assertNull(jobRepository.findById(createdJob.id).block())
     }
 }

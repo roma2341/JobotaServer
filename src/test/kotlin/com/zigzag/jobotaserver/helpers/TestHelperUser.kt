@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 @Component
 class TestHelperUser {
     companion object Options {
-        const val CURRENT_USER_ID = "12345";
+        const val CURRENT_USER_ID = "12345"
     }
 
     fun createTestUser():PlatformUser{

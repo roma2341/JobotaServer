@@ -8,9 +8,4 @@ import java.time.LocalDateTime
  * Basic auditing entity
  * @author  Roman Zinchuk
  */
-abstract class AbstractAuditingEntity (
-    @CreatedDate
-    var createdAt: LocalDateTime? = null,
-    @LastModifiedDate
-    var updatedAt: LocalDateTime? = null
-)
+abstract class AbstractAuditingEntity

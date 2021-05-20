@@ -19,9 +19,10 @@ import reactor.core.publisher.Mono
 class SecurityContextRepository @Autowired constructor(
     private val authenticationManager: AppAuthenticationManager
 ) : ServerSecurityContextRepository {
+    companion object{
+        private const val TOKEN_PREFIX = "Bearer "
+    }
     private val logger: Logger = LoggerFactory.getLogger(SecurityContextRepository::class.java)
-
-    private val TOKEN_PREFIX = "Bearer "
 
     override fun save(swe: ServerWebExchange?, sc: SecurityContext?): Mono<Void>? {
         throw UnsupportedOperationException("Not supported yet.")
@@ -29,10 +30,7 @@ class SecurityContextRepository @Autowired constructor(
 
     override fun load(swe: ServerWebExchange): Mono<SecurityContext>? {
         val request: ServerHttpRequest = swe.request
-        val authHeader: String? = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION)
-        if(authHeader == null) {
-            return Mono.empty();
-        }
+        val authHeader: String = request.headers.getFirst(HttpHeaders.AUTHORIZATION) ?: return Mono.empty()
         var authToken: String? = null
         if (authHeader != null && authHeader.startsWith(TOKEN_PREFIX)) {
             authToken = authHeader.replace(TOKEN_PREFIX, "")
@@ -40,7 +38,7 @@ class SecurityContextRepository @Autowired constructor(
             logger.warn("couldn't find bearer string, will ignore the header.")
         }
         if(authToken == null){
-            return  Mono.empty();
+            return  Mono.empty()
         }
         val auth: Authentication = UsernamePasswordAuthenticationToken(authToken, authToken)
         return authenticationManager

@@ -4,18 +4,8 @@ package com.zigzag.jobotaserver.migrations
 
 import com.github.cloudyrock.mongock.ChangeLog
 import com.github.cloudyrock.mongock.ChangeSet
-import com.mongodb.BasicDBObject
-import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.IndexOptions
 import com.zigzag.jobotaserver.features.user.database.PlatformUser
-import com.zigzag.jobotaserver.features.user.database.PlatformUserRepository
 import com.zigzag.jobotaserver.features.user.service.IPlatformUserService
-import com.zigzag.jobotaserver.features.user.service.PlatformUserService
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.mongodb.core.schema.JsonSchemaProperty
-
-import org.springframework.data.mongodb.core.schema.MongoJsonSchema
-
 
 
 /**
@@ -26,8 +16,8 @@ import org.springframework.data.mongodb.core.schema.MongoJsonSchema
 class ChangeLog001_Initial {
     @ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
     fun initTestUsers( userService: IPlatformUserService){
-        val testUser = PlatformUser(email="t@t.t",password = "p",roles = listOf("admin","test"));
-        userService.create(testUser).block();
+        val testUser = PlatformUser(email="t@t.t",password = "p",roles = listOf("admin","test"))
+        userService.create(testUser).block()
     }
     /*@ChangeSet(order = "001", id = "createMyCollection", author = "zigzag")
     fun changeWithMongoDatabase(db: MongoDatabase) {

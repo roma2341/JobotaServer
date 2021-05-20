@@ -10,6 +10,6 @@ import java.time.LocalDateTime
 @Service
 class DateHelper : IDateHelper {
     override fun now(): LocalDateTime {
-       return LocalDateTime.now();
+       return LocalDateTime.now()
     }
 }

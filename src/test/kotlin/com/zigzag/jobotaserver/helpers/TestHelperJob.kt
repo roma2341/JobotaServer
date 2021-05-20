@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component
 @Component
 class TestHelperJob {
     fun createTestJob():PlatformJob{
-        return PlatformJob(name="test-job",description = "test description");
+        return PlatformJob(name="test-job",description = "test description")
     }
 }
